@@ -22,6 +22,7 @@ public class Security {
         .authorizeHttpRequests(request -> {
             request
                 .requestMatchers(HttpMethod.POST, "/api/user").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/user/validate/email").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/login").permitAll()
                 .anyRequest()
                 .authenticated();

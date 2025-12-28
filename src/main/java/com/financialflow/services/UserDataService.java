@@ -7,6 +7,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.financialflow.dto.EmailRequest;
+import com.financialflow.dto.PasswordRequest;
 import com.financialflow.dto.UserDataDTO;
 import com.financialflow.dto.UserResponse;
 import com.financialflow.mapper.UserDataMapper;
@@ -55,16 +57,16 @@ public class UserDataService {
         return mapper.convertUsertToResponse(updatedUser);
     }
 
-    public String updatePasswordUser(int id, String newPassword){
+    public String updatePasswordUser(int id, PasswordRequest newPassword){
         UserData userEntity = repository.findById(id).orElseThrow(() ->
             new RuntimeException("Not User match"));
-        userEntity.setPassword(encoder.encode(newPassword));
+        userEntity.setPassword(encoder.encode(newPassword.getNewPassword()));
         repository.save(userEntity);
         return "Password update Successfully";
     }
 
-    public String verifyEmail(String email){
-        Optional<UserData> emailVerify = repository.findByEmail(email);
+    public String verifyEmail(EmailRequest email){
+        Optional<UserData> emailVerify = repository.findByEmail(email.getEmail());
         if(emailVerify.isEmpty()){
             return "Email not found";
         }else{

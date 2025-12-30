@@ -28,7 +28,7 @@ public class Category {
     private TransactionType transactionType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "used_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private UserData user;
 
     public Category(int id, String name, TransactionType transactionType, UserData user){

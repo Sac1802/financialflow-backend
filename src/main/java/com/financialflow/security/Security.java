@@ -22,8 +22,7 @@ public class Security {
         .authorizeHttpRequests(request -> {
             request
                 .requestMatchers(HttpMethod.POST, "/api/user").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/user/validate/email").permitAll()
-                .requestMatchers(HttpMethod.POST, "/api/login").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/auth/login").permitAll()
                 .anyRequest()
                 .authenticated();
         }).sessionManagement(session -> session

@@ -42,6 +42,12 @@ public class UserDataService {
             .map(mapper::convertUsertToResponse).toList();
     }
 
+    public UserData findUserById(int id){
+        Optional<UserData> userFind = repository.findById(id);
+        if(!userFind.isPresent()) throw new RuntimeException("NOt user match with any id");
+        return userFind.get();
+    }
+
     public UserResponse getUserById(int id){
         UserData userFind = repository.findById(id).orElseThrow(() ->
             new RuntimeException("Not User match"));

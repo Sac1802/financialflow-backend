@@ -10,13 +10,17 @@ import com.financialflow.services.UserDataService;
 @Component
 public class CategoryMapper {
 
-    private UserDataService service;
+    private final UserDataService service;
+    
+    public CategoryMapper(UserDataService service){
+        this.service = service;
+    }
     
     public Category convertDTOToCategory(CategoryDTO data, int id){
         Category category = new Category();
         category.setName(data.getName());
         category.setTransactionType(data.getTransactionType());
-        UserData user = findUserById(id);
+        UserData user = service.findUserById(id);
         if(user == null){
             throw new RuntimeException("Id not found");
         }

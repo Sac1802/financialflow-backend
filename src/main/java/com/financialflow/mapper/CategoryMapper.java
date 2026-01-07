@@ -34,9 +34,4 @@ public class CategoryMapper {
         category.setTransactionType(data.getTransactionType());
         return category;
     }
-
-    private UserData findUserById(int id){
-        UserData userFind = service.findUserById(id);
-        return userFind;
-    }
 }

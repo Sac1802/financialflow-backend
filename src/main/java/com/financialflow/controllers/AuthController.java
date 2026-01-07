@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.financialflow.dto.loginDTO;
-import com.financialflow.security.Auth;
 import com.financialflow.services.AuthService;
 
 import jakarta.validation.Valid;

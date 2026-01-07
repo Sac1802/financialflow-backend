@@ -41,8 +41,15 @@ public class CategoryService {
     }
 
     public CategoryDTO getCategoryById(int id) {
-        Category categoryFind = repository.findById(id).orElseThrow();
+        Category categoryFind = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
         return mapper.convertCategoryToDTO(categoryFind);
+    }
+
+    public Category getCategoryByIdCategory(int id) {
+        Category categoryFind = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+        return categoryFind;
     }
 
     public CategoryDTO updateCategory(CategoryDTO categoryDTO, int id) {

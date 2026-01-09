@@ -33,7 +33,7 @@ public class CategoryController {
         return ResponseEntity.ok(categorySaved);
     }
 
-    @GetMapping
+    @GetMapping("/id")
     public ResponseEntity<?> getCategoryByUser(@AuthenticationPrincipal Integer userId) {
         return ResponseEntity.ok(service.getCategoriesByUser(userId));
     }

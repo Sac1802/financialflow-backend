@@ -39,7 +39,7 @@ public class UserDataController {
         return ResponseEntity.ok(service.getUsers());
     }
 
-    @GetMapping
+    @GetMapping("/id")
     public ResponseEntity<?> getUserById(@AuthenticationPrincipal Integer userId){
         UserResponse userFind = service.getUserById(userId);
         return ResponseEntity.ok(userFind);

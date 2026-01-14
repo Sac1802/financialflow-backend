@@ -15,22 +15,27 @@ import com.financialflow.services.GenerateFilesService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/pdf")
-public class PdfController {
+@RequestMapping("/api/excel")
+public class ExcelController {
 
-    private final GenerateFilesService filesGenearator;
+    private final GenerateFilesService fileGenerator;
 
-    public PdfController(GenerateFilesService filesGenearator) {
-        this.filesGenearator = filesGenearator;
+    public ExcelController(GenerateFilesService fileGenerator) {
+        this.fileGenerator = fileGenerator;
     }
-
+    
     @GetMapping("/generate")
-    public ResponseEntity<?> generatePdf(@Valid @RequestBody PeriodPdfDTO period,
+    public ResponseEntity<?> generateExcelReport(@Valid @RequestBody PeriodPdfDTO period, 
             @AuthenticationPrincipal Integer userId) {
-        byte[] pdfBytes = filesGenearator.generatePdf(userId, period);
+        byte[] excelBytes = fileGenerator.generateExcel(userId, period);
         return ResponseEntity.ok()
-            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"financial_report.pdf\"")
-            .contentType(MediaType.APPLICATION_PDF)
-            .body(pdfBytes);
+        .header(HttpHeaders.CONTENT_DISPOSITION,
+                "attachment; filename=report.xlsx")
+        .contentType(
+            MediaType.parseMediaType(
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            )
+        )
+        .body(excelBytes);
     }
 }

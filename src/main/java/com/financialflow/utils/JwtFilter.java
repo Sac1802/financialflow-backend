@@ -24,20 +24,28 @@ public class JwtFilter extends OncePerRequestFilter {
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, 
-        HttpServletResponse response, 
-        FilterChain filterChain)
+    protected void doFilterInternal(HttpServletRequest request,
+            HttpServletResponse response,
+            FilterChain filterChain)
             throws ServletException, IOException {
+        String path = request.getRequestURI();
+        if (path.startsWith("/v3/api-docs")
+                || path.startsWith("/swagger-ui")
+                || path.equals("/swagger-ui.html")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
         String autHeader = request.getHeader("Authorization");
-        if(autHeader != null && autHeader.startsWith("Bearer ")){
+        if (autHeader != null && autHeader.startsWith("Bearer ")) {
             String token = autHeader.substring(7);
-            try{
+            try {
                 int userId = auth.verifyToken(token);
-                UsernamePasswordAuthenticationToken authentication = 
-                    new UsernamePasswordAuthenticationToken(userId, null, Collections.emptyList());
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userId,
+                        null, Collections.emptyList());
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
-            }catch(Exception e){
+            } catch (Exception e) {
+                SecurityContextHolder.clearContext();
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 return;
             }

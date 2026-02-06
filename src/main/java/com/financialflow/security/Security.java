@@ -19,31 +19,35 @@ import com.financialflow.utils.JwtFilter;
 public class Security {
 
     private final JwtFilter jwtFilter;
-    
+
     public Security(JwtFilter jwtFilter) {
         this.jwtFilter = jwtFilter;
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-        .csrf(AbstractHttpConfigurer::disable)
-        .authorizeHttpRequests(request -> {
-            request
-                .requestMatchers(HttpMethod.POST, "/api/user").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/auth/login").permitAll()
-                .anyRequest()
-                .authenticated();
-        }).sessionManagement(session -> session
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        )
-        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(request -> {
+                    request
+                            .requestMatchers(HttpMethod.POST, "/api/user").permitAll()
+                            .requestMatchers(HttpMethod.GET, "/api/auth/login").permitAll()
+                            .requestMatchers(
+                                    "/v3/api-docs/**",
+                                    "/swagger-ui/**",
+                                    "/swagger-ui.html")
+                            .permitAll()
+                            .anyRequest()
+                            .authenticated();
+                }).sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

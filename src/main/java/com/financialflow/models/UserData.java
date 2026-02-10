@@ -5,8 +5,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(indexes = {
+    @Index(name = "idx_user_email", columnList = "email", unique = true),
+    @Index(name = "user_idx", columnList = "id")
+})
 public class UserData {
     
     @Id

@@ -2,6 +2,7 @@ package com.financialflow.services;
 
 import java.util.List;
 
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import com.financialflow.dto.CategoryDTO;
@@ -20,7 +21,7 @@ public class CategoryService {
         this.mapper = mapper;
     }
 
-    public CategoryDTO saveCategory(CategoryDTO categoryDTO, int id) {
+    public CategoryDTO saveCategory(@NonNull CategoryDTO categoryDTO, int id) {
         Category categoryConvert = mapper.convertDTOToCategory(categoryDTO, id);
         CategoryDTO categorySaved = mapper.convertCategoryToDTO(repository.save(categoryConvert));
         return categorySaved;

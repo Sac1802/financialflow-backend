@@ -28,7 +28,7 @@ public class TransactionDTO {
     @NotNull(message = "Date is required")
     private LocalDate date;
 
-    @Size(min = 1, message = "Category ID must be provided")
+    @Min(1)
     private int category;
 
     public TransactionDTO(BigDecimal amount, TransactionType transactionType,

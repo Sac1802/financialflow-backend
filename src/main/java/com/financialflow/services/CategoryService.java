@@ -6,6 +6,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import com.financialflow.dto.CategoryDTO;
+import com.financialflow.dto.NumberCategories;
 import com.financialflow.mapper.CategoryMapper;
 import com.financialflow.models.Category;
 import com.financialflow.repository.CategoryRepository;
@@ -64,5 +65,9 @@ public class CategoryService {
     public String deleteCategory(int id) {
         repository.deleteById(id);
         return "Category deleted successfully";
+    }
+
+    public List<NumberCategories> getAmountTotalCategories(int id){
+        return repository.findNumberCategories(id);
     }
 }

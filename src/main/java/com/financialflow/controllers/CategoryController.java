@@ -49,6 +49,13 @@ public class CategoryController {
         return ResponseEntity.ok(service.getCategoriesByUser(userId));
     }
 
+    @Operation(summary = "Get amount total categories", description = "Retrieves all categories for the authenticated user and amount total categories.")
+    @ApiResponse(responseCode = "200", description = "Categories amount retrieved successfully")
+    @GetMapping("/amount")
+    public ResponseEntity<?> getAmountTotalCategories(@AuthenticationPrincipal Integer userId) {
+        return ResponseEntity.ok(service.getAmountTotalCategories(userId));
+    }
+
     @Operation(summary = "Get all categories", description = "Retrieves all categories from the system.")
     @ApiResponse(responseCode = "200", description = "Categories retrieved successfully")
     @GetMapping()

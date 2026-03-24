@@ -31,6 +31,7 @@ public class Security {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(request -> {
                     request
+                            .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                             .requestMatchers(HttpMethod.POST, "/api/user").permitAll()
                             .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
                             .requestMatchers(

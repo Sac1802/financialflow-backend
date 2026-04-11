@@ -38,7 +38,7 @@ public class CategoryService {
     public List<CategoryDTO> getCategoriesByUser(int id) {
         List<Category> categories = repository.findByUser_Id(id);
         return categories.stream()
-                .map(mapper::convertCategoryToDTO)
+                .map(mapper::convertCategoryToDTOWithId)
                 .toList();
     }
 

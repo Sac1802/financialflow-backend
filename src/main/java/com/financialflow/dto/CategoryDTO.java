@@ -8,7 +8,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class CategoryDTO {
-    
+
+    private Integer id;
+
     @Size(min = 2, message = "The username must contain at least 2 characters.")
     private String name;
 
@@ -21,6 +23,14 @@ public class CategoryDTO {
     public CategoryDTO(String name, TransactionType transactionType){
         this.name = name;
         this.transactionType = transactionType;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public CategoryDTO(){

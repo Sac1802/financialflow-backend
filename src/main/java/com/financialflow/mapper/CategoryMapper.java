@@ -34,4 +34,12 @@ public class CategoryMapper {
         category.setTransactionType(data.getTransactionType());
         return category;
     }
+
+    public CategoryDTO convertCategoryToDTOWithId(Category data){
+        CategoryDTO category = new CategoryDTO();
+        category.setId(data.getId());
+        category.setName(data.getName());
+        category.setTransactionType(data.getTransactionType());
+        return category;
+    }
 }

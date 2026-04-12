@@ -4,6 +4,7 @@ package com.financialflow.mapper;
 import org.springframework.stereotype.Component;
 
 import com.financialflow.dto.UserDataDTO;
+import com.financialflow.dto.UserInfo;
 import com.financialflow.dto.UserResponse;
 import com.financialflow.models.UserData;
 
@@ -31,6 +32,13 @@ public class UserDataMapper {
         user.setId(data.getId());
         user.setName(data.getName());
         user.setEmail(data.getEmail());
+        return user;
+    }
+
+    public UserInfo convertUserToInfo(UserData data){
+        UserInfo user = new UserInfo();
+        user.setEmail(data.getEmail());
+        user.setName(data.getName());
         return user;
     }
 }

@@ -33,4 +33,11 @@ public class UserDataMapper {
         user.setEmail(data.getEmail());
         return user;
     }
+
+    public UserInfo convertUserToInfo(UserData data){
+        UserInfo user = new UserInfo();
+        user.setEmail(data.getEmail());
+        user.setName(data.getName());
+        return user;
+    }
 }

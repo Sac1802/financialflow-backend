@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.financialflow.dto.EmailRequest;
 import com.financialflow.dto.PasswordRequest;
 import com.financialflow.dto.UserDataDTO;
+import com.financialflow.dto.UserInfo;
 import com.financialflow.dto.UserResponse;
 import com.financialflow.mapper.UserDataMapper;
 import com.financialflow.models.UserData;
@@ -42,10 +43,10 @@ public class UserDataService {
             .map(mapper::convertUsertToResponse).toList();
     }
 
-    public UserData findUserById(int id){
+    public UserInfo findUserById(int id){
         Optional<UserData> userFind = repository.findById(id);
         if(!userFind.isPresent()) throw new RuntimeException("NOt user match with any id");
-        return userFind.get();
+        return mapper.convertUserToInfo(userFind.get());
     }
 
     public UserResponse getUserById(int id){

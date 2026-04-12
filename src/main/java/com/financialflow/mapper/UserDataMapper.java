@@ -4,6 +4,7 @@ package com.financialflow.mapper;
 import org.springframework.stereotype.Component;
 
 import com.financialflow.dto.UserDataDTO;
+import com.financialflow.dto.UserInfo;
 import com.financialflow.dto.UserResponse;
 import com.financialflow.models.UserData;
 

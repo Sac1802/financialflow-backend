@@ -14,6 +14,8 @@ import jakarta.validation.constraints.Size;
 
 public class TransactionDTO {
 
+    private int id;
+
     @Min(value = 0, message = "Amount must be non-negative")
     private BigDecimal amount;
 
@@ -31,8 +33,9 @@ public class TransactionDTO {
     @Min(1)
     private int category;
 
-    public TransactionDTO(BigDecimal amount, TransactionType transactionType,
+    public TransactionDTO(int id, BigDecimal amount, TransactionType transactionType,
             String description, LocalDate date, int category) {
+        this.id = id;
         this.amount = amount;
         this.transactionType = transactionType;
         this.description = description;
@@ -41,6 +44,14 @@ public class TransactionDTO {
     }
 
     public TransactionDTO() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public BigDecimal getAmount() {

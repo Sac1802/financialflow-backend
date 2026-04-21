@@ -2,14 +2,16 @@ package com.financialflow.dto;
 
 import java.time.LocalDate;
 
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.PastOrPresent;
 
 public class PeriodPdfDTO {
     
-    @PastOrPresent(message = "The start date must be in the past or present")
+    @PastOrPresent(message = "The start date must be today or in the future")
     private LocalDate starDate;
 
-    @PastOrPresent(message = "The end date must be in the past or present")
+
+    @FutureOrPresent(message = "The end date must be today or in the future")
     private LocalDate endDate;
 
     public PeriodPdfDTO(LocalDate startDate, LocalDate endDate){
